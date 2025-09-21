@@ -42,3 +42,23 @@ Tests & results:
 
 Open issues / next actions:
 - Proceed to M2: Windowing & Dataset
+
+
+Milestone: M2 — Windowing & Dataset
+
+Decisions:
+- Step=1 stride; val split by ratio tail-based.
+
+Commands run:
+- python make_dataset.py --csv ... --scaler ... --lookback 100 --horizon 12 --val-ratio 0.2 --out ...
+- python -m pytest -q
+
+Artifacts produced:
+- artifacts/datasets/BTCUSDT_1h_L100_H12.npz (with meta)
+
+Tests & results:
+- Pytest: all windowing tests passed
+- Dataset shapes printed as expected
+
+Open issues / next actions:
+- Ready for M3: LSTM Model & Training (PyTorch)
