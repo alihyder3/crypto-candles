@@ -1,0 +1,31 @@
+{
+  "feature_mins": {
+    "open": 98882.85,
+    "high": 99453.75,
+    "low": 98200.0,
+    "close": 98882.84,
+    "volume": 55.66311
+  },
+  "feature_maxs": {
+    "open": 123847.82,
+    "high": 124474.0,
+    "low": 123337.66,
+    "close": 123847.83,
+    "volume": 6557.04047
+  },
+  "target_min": 98882.84,
+  "target_max": 123847.83,
+  "feature_cols": [
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume"
+  ],
+  "target_col": "close",
+  "version": 1,
+  "meta": {
+    "symbol": "BTCUSDT",
+    "interval": "1h"
+  }
+}

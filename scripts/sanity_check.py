@@ -3,10 +3,12 @@ import sys
 import platform
 from src.config import CONFIG
 
-def try_import(name):
+def try_import(pkg_label, import_name=None):
+    modname = import_name or pkg_label
     try:
-        mod = importlib.import_module(name)
-        return mod.__version__ if hasattr(mod, "__version__") else "OK"
+        mod = importlib.import_module(modname)
+        ver = getattr(mod, "__version__", "OK")
+        return ver
     except Exception as e:
         return f"ERROR: {e}"
 
@@ -18,11 +20,22 @@ def main():
           f"LOOKBACK={CONFIG.lookback}, HORIZON={CONFIG.horizon}")
 
     print("\nPackages:")
-    for pkg in ["numpy", "pandas", "python_binance", "requests", "websocket", "tensorflow", "torch", "Flask", "fastapi"]:
-        ver = try_import(pkg)
-        print(f" - {pkg}: {ver}")
+    pkgs = [
+        ("numpy", None),
+        ("pandas", None),
+        ("python-binance", "binance"),   # package name, import module
+        ("requests", None),
+        ("websocket-client", "websocket"),
+        ("torch", None),
+        ("fastapi", None),
+        ("Flask", None),                 # okay if ERROR since we chose FastAPI
+    ]
+    for label, import_name in pkgs:
+        ver = try_import(label, import_name)
+        shown = f"{label} ({import_name or label})"
+        print(f" - {shown}: {ver}")
 
-    print("\nResult: If your chosen ML + web framework show proper versions (not ERROR) and numpy/pandas load, you're good.")
+    print("\nResult: Your chosen ML + web framework should show versions without ERROR.")
 
 if __name__ == "__main__":
     main()
